@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Feria Digital</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <h1>Feria Digital de la Vereda</h1>
+    <p>
+      La Feria Digital de la Vereda El Progreso es un espacio donde la comunidad comparte sus cultivos, productos
+      agrícolas y logros educativos, mostrando el trabajo de las familias campesinas y de los estudiantes de la región.
+    </p>
+
+    <nav class="nav-header">
+
+      <button class="btn" data-vista="inicio">Inicio</button>
+      <button class="btn" data-vista="cultivo">Cultivos</button>
+      <button class="btn" data-vista="galeria">Galería</button>
+      <button class="btn" data-vista="historias">Historias</button>
+      <button class="btn" data-vista="contacto">Contacto</button>
+
+    </nav>
+
+  </header>
+
+  <main class="contenedor">
+
+    <!-- VISTA INICIO -->
+    <section id="vista-inicio" class="vista activa">
+    </section>
+
+
+    <!-- VISTA CULTIVOS -->
+    <section id="vista-cultivo" class="vista">
+
+      <div class="tarjeta">
+        <h2>Café orgánico</h2>
+        <p>El café orgánico es uno de los cultivos más importantes de la vereda.</p>
+
+        <button class="ver-mas">Ver más</button>
+
+        <div class="detalle oculto">
+          <p>
+            Este café se cultiva en tierras fértiles y se recolecta manualmente para garantizar la calidad del grano.
+            Después de la cosecha, el café se seca y se procesa cuidadosamente, logrando un sabor natural y
+            característico de la región.
+          </p>
+        </div>
+      </div>
+
+      <div class="tarjeta">
+        <h2>Maíz</h2>
+        <p>El maíz es uno de los cultivos tradicionales de la vereda.</p>
+
+        <button class="ver-mas">Ver más</button>
+
+        <div class="detalle oculto">
+          <p>
+            El maíz es cultivado por las familias campesinas utilizando técnicas tradicionales que han pasado de
+            generación en generación. Después de la cosecha, el maíz se utiliza para la preparación de diferentes
+            alimentos típicos de la región.
+          </p>
+        </div>
+      </div>
+
+      <div class="tarjeta">
+        <h2>Plátano</h2>
+        <p>El plátano es un cultivo muy común en la región.</p>
+
+        <button class="ver-mas">Ver más</button>
+
+        <div class="detalle oculto">
+          <p>
+            El plátano se cultiva durante todo el año gracias a las condiciones climáticas de la vereda. Este producto
+            es muy importante para la economía local.
+          </p>
+        </div>
+      </div>
+
+      <div class="tarjeta">
+        <h2>Yuca</h2>
+        <p>La yuca es un alimento básico cultivado por los agricultores.</p>
+
+        <button class="ver-mas">Ver más</button>
+
+        <div class="detalle oculto">
+          <p>
+            La yuca es un cultivo resistente que se adapta muy bien a los suelos de la región y se usa en muchos platos
+            tradicionales.
+          </p>
+        </div>
+      </div>
+
+      <div class="tarjeta">
+        <h2>Frijol</h2>
+        <p>El fríjol aporta proteínas y es muy usado en la alimentación campesina.</p>
+
+        <button class="ver-mas">Ver más</button>
+
+        <div class="detalle oculto">
+          <p>
+            El fríjol se cultiva en pequeñas parcelas familiares y es una fuente importante de proteína vegetal.
+          </p>
+        </div>
+      </div>
+
+      <button class="btn-volver" id="volver-cultivo">
+        ← Volver
+      </button>
+
+    </section>
+
+
+    <!-- VISTA GALERIA -->
+    <section id="vista-galeria" class="vista">
+
+      <h2>Galería de fotos</h2>
+
+      <p>
+        En esta sección se muestran algunas imágenes de los cultivos y las actividades agrícolas de la vereda.
+      </p>
+
+      <div class="galeria">
+
+        <img src="https://grain.org/system/articles/logos/000/006/883/larger/colombia_maiz.png" alt="Maíz">
+
+        <img src="https://www.historiasquelaten.com/wp-content/uploads/2020/07/PLATANO-VERDE-2-of-10-980x653.jpg"
+          alt="Plátano">
+
+        <img
+          src="https://estaticos.elcolombiano.com/binrepository/780x570/0c0/780d565/none/11101/UEAP/caguacates-sonson9-21_42453783_20230527182556.jpg"
+          alt="Aguacate">
+
+        <img
+          src="https://static.nationalgeographicla.com/files/styles/image_3200/public/0017_caqueta-revival-origin_4741-08-v2.webp?w=1450&h=1465&q=100"
+          alt="Agricultura">
+
+      </div>
+
+      <button class="btn-volver" id="volver-galeria">
+        ← Volver
+      </button>
+
+    </section>
+
+
+    <!-- VISTA HISTORIAS -->
+    <section id="vista-historias" class="vista">
+
+      <h2>Historias y logros escolares</h2>
+
+      <p> Los estudiantes de la institución educativa de la vereda han desarrollado diferentes proyectos para fortalecer
+        el aprendizaje y apoyar a la comunidad. Uno de estos proyectos es la creación de esta feria digital, donde
+        aplican conocimientos de tecnología, programación y comunicación para mostrar los productos agrícolas de la
+        región. Este proyecto demuestra cómo la educación y la tecnología pueden ayudar al desarrollo de las comunidades
+        rurales. </p>
+      <h2>Productores</h2>
+      <p> Don Miguel Rodríguez es un agricultor de la vereda El Progreso que ha dedicado más de veinte años de su vida
+        al cultivo de maíz. Desde muy joven aprendió el trabajo del campo junto a su padre, quien le enseñó la
+        importancia de cuidar la tierra y respetar los ciclos de la naturaleza. Cada temporada, Don Miguel prepara su
+        terreno con paciencia. Primero limpia la parcela, luego siembra las semillas de maíz y durante varios meses
+        cuida el cultivo con dedicación. Para él, el maíz no es solo un alimento, sino una tradición que representa el
+        esfuerzo de muchas generaciones campesinas. Además de producir maíz para vender en el mercado local, Don Miguel
+        también utiliza parte de su cosecha para alimentar a sus animales y para preparar alimentos tradicionales junto
+        a su familia, como arepas y envueltos. De esta manera, su trabajo no solo sostiene su hogar, sino que también
+        mantiene vivas las costumbres de la región. Hoy en día, Don Miguel se siente orgulloso de compartir su
+        experiencia con los jóvenes de la comunidad, enseñándoles que la agricultura es un trabajo digno y fundamental
+        para el desarrollo de la vereda. </p>
+      <h2>Buenas prácticas</h2>
+      <p> En la vereda El Progreso, los agricultores han aprendido que cuidar la tierra es tan importante como obtener
+        una buena cosecha. Por eso, muchas familias campesinas aplican buenas prácticas agrícolas que ayudan a proteger
+        el suelo, el agua y el medio ambiente. Una de las prácticas más comunes es la rotación de cultivos. Los
+        productores alternan cultivos como maíz, plátano y aguacate para evitar que la tierra pierda nutrientes y así
+        mantener el suelo fértil por más tiempo. Esto también ayuda a reducir plagas y enfermedades en los cultivos.
+        Otra práctica importante es el uso responsable del agua. Muchos agricultores utilizan sistemas de riego
+        sencillos que permiten aprovechar mejor el agua, especialmente en épocas de sequía. Además, en la vereda se
+        promueve el uso de abonos orgánicos, como el compost hecho con restos de plantas y estiércol de animales. Esto
+        ayuda a mejorar la calidad del suelo sin necesidad de usar tantos productos químicos. Gracias a estas prácticas,
+        los agricultores de El Progreso no solo producen alimentos de buena calidad, sino que también cuidan el entorno
+        natural para las futuras generaciones </p>
+      <h2>Importancia de la agricultura</h2>
+      <p>La agricultura es una de las actividades más importantes en la vereda El Progreso. Gracias al trabajo de los
+        agricultores se producen alimentos como maíz, plátano y aguacate que abastecen a muchas familias. Además, esta
+        actividad genera empleo y ayuda a mantener vivas las tradiciones campesinas. El trabajo en el campo también
+        fortalece la economía local y permite que la comunidad siga creciendo.</p>
+
+      <button class="btn-volver" id="volver-historias">
+        ← Volver
+      </button>
+
+    </section>
+
+
+    <!-- VISTA CONTACTO -->
+    <section id="vista-contacto" class="vista">
+
+      <h2>Contacto</h2>
+
+      <div class="tarjeta">
+        <h3>Formulario de contacto</h3>
+
+        <form id="formulario">
+
+          <input type="text" id="nombre" placeholder="Nombre">
+          <input type="text" id="celular" placeholder="Celular">
+          <textarea id="mensaje" placeholder="Escribe tu mensaje"></textarea>
+
+          <button type="submit">Enviar</button>
+
+          <p id="respuesta"></p>
+
+        </form>
+
+      </div>
+
+      <button class="btn-volver" id="volver-contacto">
+        ← Volver
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+    <p>Feria Digital - Comunidad Rural</p>
+  </footer>
+
+  <script src="funciones.js"></script>
+
+</body>
+
+</html>
