@@ -1,5 +1,8 @@
-// Cambia entre vistas sin recargar la página
+/* =====================================
+   SISTEMA DE CAMBIO DE VISTAS
+===================================== */
 
+// Cambia entre vistas sin recargar la página
 function mostrarVista(nombre, guardarHistorial = true) {
 
   console.log("Cambiando a la vista:", nombre);
@@ -10,11 +13,13 @@ function mostrarVista(nombre, guardarHistorial = true) {
   const objetivo = document.getElementById(`vista-${nombre}`);
 
   if (objetivo) {
+
     objetivo.classList.add("activa");
     console.log("Vista mostrada correctamente:", nombre);
 
+    // Guardar en historial del navegador
     if (guardarHistorial) {
-      history.pushState({vista:nombre}, "", "#vista-" + nombre);
+      history.pushState({ vista: nombre }, "", "#vista-" + nombre);
     }
 
   } else {
@@ -23,7 +28,10 @@ function mostrarVista(nombre, guardarHistorial = true) {
 
 }
 
-// Botones del menú principal
+
+/* =====================================
+   BOTONES DEL MENÚ PRINCIPAL
+===================================== */
 
 document.querySelectorAll("button[data-vista]").forEach(btn => {
 
@@ -40,30 +48,39 @@ document.querySelectorAll("button[data-vista]").forEach(btn => {
 });
 
 
-// Botones volver
+/* =====================================
+   BOTONES VOLVER
+===================================== */
 
-document.getElementById("volver-cultivo").addEventListener("click", () => {
-  console.log("Volviendo al inicio desde Cultivos");
-  mostrarVista("inicio");
+const botonesVolver = [
+  "volver-cultivo",
+  "volver-galeria",
+  "volver-historias",
+  "volver-contacto"
+];
+
+botonesVolver.forEach(id => {
+
+  const boton = document.getElementById(id);
+
+  if (boton) {
+
+    boton.addEventListener("click", () => {
+
+      console.log("Volviendo al inicio desde", id);
+
+      mostrarVista("inicio");
+
+    });
+
+  }
+
 });
 
-document.getElementById("volver-galeria").addEventListener("click", () => {
-  console.log("Volviendo al inicio desde Galería");
-  mostrarVista("inicio");
-});
 
-document.getElementById("volver-historias").addEventListener("click", () => {
-  console.log("Volviendo al inicio desde Historias");
-  mostrarVista("inicio");
-});
-
-document.getElementById("volver-contacto").addEventListener("click", () => {
-  console.log("Volviendo al inicio desde Contacto");
-  mostrarVista("inicio");
-});
-
-
-// VER MÁS
+/* =====================================
+   BOTÓN VER MÁS / VER MENOS
+===================================== */
 
 document.querySelectorAll(".ver-mas").forEach(boton => {
 
@@ -73,57 +90,78 @@ document.querySelectorAll(".ver-mas").forEach(boton => {
 
     detalle.classList.toggle("oculto");
 
-    if(detalle.classList.contains("oculto")){
+    if (detalle.classList.contains("oculto")) {
+
       boton.textContent = "Ver más";
       console.log("Se ocultó la información");
-    } 
-    else{
+
+    } else {
+
       boton.textContent = "Ver menos";
       console.log("Se mostró más información");
+
     }
 
   });
 
 });
 
-document.getElementById("formulario").addEventListener("submit", function(e){
 
-e.preventDefault();
+/* =====================================
+   VALIDACIÓN DEL FORMULARIO
+===================================== */
 
-let nombre = document.getElementById("nombre").value;
-let celular = document.getElementById("celular").value;
-let mensaje = document.getElementById("mensaje").value;
+const formulario = document.getElementById("formulario");
 
-if(nombre === ""){
-  document.getElementById("respuesta").textContent = "Error: el nombre es obligatorio";
-  console.log("Error: nombre vacío");
-  return;
+if (formulario) {
+
+  formulario.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    let nombre = document.getElementById("nombre").value;
+    let celular = document.getElementById("celular").value;
+    let mensaje = document.getElementById("mensaje").value;
+
+    const respuesta = document.getElementById("respuesta");
+
+    if (nombre === "") {
+      respuesta.textContent = "Error: el nombre es obligatorio";
+      console.log("Error: nombre vacío");
+      return;
+    }
+
+    if (celular.length !== 10) {
+      respuesta.textContent = "Error: el celular debe tener 10 dígitos";
+      console.log("Error: celular incorrecto");
+      return;
+    }
+
+    if (mensaje.length < 10) {
+      respuesta.textContent = "Error: el mensaje debe tener mínimo 10 caracteres";
+      console.log("Error: mensaje muy corto");
+      return;
+    }
+
+    respuesta.textContent = "Formulario enviado correctamente";
+    console.log("Formulario válido");
+
+  });
+
 }
 
-if(celular.length !== 10){
-  document.getElementById("respuesta").textContent = "Error: el celular debe tener 10 dígitos";
-  console.log("Error: celular incorrecto");
-  return;
-}
 
-if(mensaje.length < 10){
-  document.getElementById("respuesta").textContent = "Error: el mensaje debe tener mínimo 10 caracteres";
-  console.log("Error: mensaje muy corto");
-  return;
-}
+/* =====================================
+   HISTORIAL DEL NAVEGADOR
+===================================== */
 
-document.getElementById("respuesta").textContent = "Formulario enviado correctamente";
-console.log("Formulario válido");
+// Detecta uso de flechas del navegador (atrás / adelante)
+window.addEventListener("popstate", function (e) {
 
-});
+  if (e.state && e.state.vista) {
 
-
-// Detectar uso de flechas del navegador
-
-window.addEventListener("popstate", function(e){
-
-  if(e.state && e.state.vista){
     mostrarVista(e.state.vista, false);
+
   }
 
 });
