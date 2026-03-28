@@ -4,12 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Feria Digital</title>
-
-  <!-- CSS separado -->
   <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body>
+<body style="display:none"> <!-- Ocultamos hasta validar login -->
+
+  <script type="module">
+    import { auth } from "./firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+    // Verificar estado de login
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.body.style.display = "block"; // Mostrar contenido si está logueado
+      } else {
+        window.location.href = "login.html"; // Redirigir si no está logueado
+      }
+    });
+  </script>
 
   <!-- ================= HEADER ================= -->
   <header class="header">
@@ -23,51 +35,35 @@
 
     <!-- ===== MENÚ DE NAVEGACIÓN ===== -->
     <nav class="nav-header">
-
       <a class="btn" href="#inicio">Inicio</a>
       <a class="btn" href="#cultivos">Cultivos</a>
       <a class="btn" href="#galeria">Galería</a>
       <a class="btn" href="#historias">Historias</a>
       <a class="btn" href="#contacto">Contacto</a>
-
     </nav>
 
   </header>
 
-
   <!-- ================= MAIN ================= -->
   <main class="contenedor">
 
-
     <!-- ===== SECCIÓN INICIO ===== -->
     <section id="inicio">
-
       <h2>Bienvenida</h2>
-
       <p>
         Esta feria digital presenta los cultivos, productos agrícolas
         y experiencias de los agricultores de la vereda El Progreso.
       </p>
-
     </section>
-
-
 
     <!-- ===== SECCIÓN CULTIVOS ===== -->
     <section id="cultivos">
-
       <h2>Cultivos de la vereda</h2>
 
-
-      <!-- ARTÍCULO -->
       <article class="tarjeta">
-
         <h3>Café orgánico</h3>
-
         <p>El café orgánico es uno de los cultivos más importantes de la vereda.</p>
-
         <button class="ver-mas">Ver más</button>
-
         <div class="detalle oculto">
           <p>
             Este café se cultiva en tierras fértiles y se recolecta manualmente para garantizar la calidad del grano.
@@ -75,187 +71,112 @@
             de la región.
           </p>
         </div>
-
       </article>
 
-
-      <!-- ARTÍCULO -->
       <article class="tarjeta">
-
         <h3>Maíz</h3>
-
         <p>El maíz es uno de los cultivos tradicionales de la vereda.</p>
-
         <button class="ver-mas">Ver más</button>
-
         <div class="detalle oculto">
           <p>
             El maíz es cultivado por las familias campesinas utilizando técnicas tradicionales que han pasado de
             generación en generación.
           </p>
         </div>
-
       </article>
 
-
-      <!-- ARTÍCULO -->
       <article class="tarjeta">
-
         <h3>Plátano</h3>
-
         <p>El plátano es un cultivo muy común en la región.</p>
-
         <button class="ver-mas">Ver más</button>
-
         <div class="detalle oculto">
           <p>
             El plátano se cultiva durante todo el año gracias a las condiciones climáticas de la vereda.
           </p>
         </div>
-
       </article>
 
-
-      <!-- ARTÍCULO -->
       <article class="tarjeta">
-
         <h3>Yuca</h3>
-
         <p>La yuca es un alimento básico cultivado por los agricultores.</p>
-
         <button class="ver-mas">Ver más</button>
-
         <div class="detalle oculto">
           <p>
             La yuca es un cultivo resistente que se adapta muy bien a los suelos de la región.
           </p>
         </div>
-
       </article>
 
-
-      <!-- ARTÍCULO -->
       <article class="tarjeta">
-
         <h3>Fríjol</h3>
-
         <p>El fríjol aporta proteínas y es muy usado en la alimentación campesina.</p>
-
         <button class="ver-mas">Ver más</button>
-
         <div class="detalle oculto">
           <p>
             El fríjol se cultiva en pequeñas parcelas familiares y es una fuente importante de proteína vegetal.
           </p>
         </div>
-
       </article>
 
     </section>
 
-
-
     <!-- ===== SECCIÓN GALERÍA ===== -->
     <section id="galeria">
-
       <h2>Galería de fotos</h2>
-
-      <p>
-        Algunas imágenes de los cultivos y actividades agrícolas
-        de la vereda.
-      </p>
-
+      <p>Algunas imágenes de los cultivos y actividades agrícolas de la vereda.</p>
       <div class="galeria">
-
         <img src="https://grain.org/system/articles/logos/000/006/883/larger/colombia_maiz.png" alt="Cultivo de maíz">
-
-        <img src="https://www.historiasquelaten.com/wp-content/uploads/2020/07/PLATANO-VERDE-2-of-10-980x653.jpg"
-          alt="Cultivo de plátano">
-
-        <img src="https://estaticos.elcolombiano.com/binrepository/780x570/0c0/780d565/none/11101/UEAP/caguacates-sonson9-21_42453783_20230527182556.jpg"
-          alt="Cultivo de aguacate">
-
-        <img src="https://static.nationalgeographicla.com/files/styles/image_3200/public/0017_caqueta-revival-origin_4741-08-v2.webp"
-          alt="Actividad agrícola">
-
+        <img src="https://www.historiasquelaten.com/wp-content/uploads/2020/07/PLATANO-VERDE-2-of-10-980x653.jpg" alt="Cultivo de plátano">
+        <img src="https://estaticos.elcolombiano.com/binrepository/780x570/0c0/780d565/none/11101/UEAP/caguacates-sonson9-21_42453783_20230527182556.jpg" alt="Cultivo de aguacate">
+        <img src="https://static.nationalgeographicla.com/files/styles/image_3200/public/0017_caqueta-revival-origin_4741-08-v2.webp" alt="Actividad agrícola">
       </div>
-
     </section>
-
-
 
     <!-- ===== SECCIÓN HISTORIAS ===== -->
     <section id="historias">
-
       <h2>Historias y logros escolares</h2>
 
       <article>
-
         <h3>Proyecto educativo</h3>
-
         <p>
           Los estudiantes desarrollaron esta feria digital para mostrar
           los productos agrícolas de la comunidad utilizando
           conocimientos de tecnología y programación.
         </p>
-
       </article>
 
       <article>
-
         <h3>Productores de la vereda</h3>
-
         <p>
           Agricultores como Don Miguel Rodríguez han dedicado gran
           parte de su vida al cultivo del maíz, transmitiendo sus
           conocimientos a las nuevas generaciones.
         </p>
-
       </article>
 
     </section>
-
-
 
     <!-- ===== SECCIÓN CONTACTO ===== -->
     <section id="contacto">
-
       <h2>Contacto</h2>
-
       <article class="tarjeta">
-
         <h3>Formulario de contacto</h3>
-
         <form id="formulario">
-
           <input type="text" id="nombre" placeholder="Nombre">
-
           <input type="text" id="celular" placeholder="Celular">
-
           <textarea id="mensaje" placeholder="Escribe tu mensaje"></textarea>
-
           <button type="submit">Enviar</button>
-
           <p id="respuesta"></p>
-
         </form>
-
       </article>
-
     </section>
-
 
   </main>
 
-
-
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-
     <p>Feria Digital - Comunidad Rural</p>
-
   </footer>
-
 
   <!-- JS separado -->
   <script src="funciones.js"></script>
