@@ -1,20 +1,18 @@
 /* =========================
    CONFIGURACIÓN GENERAL
    ========================= */
-
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: system-ui, Arial, sans-serif;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: #0f172a; /* Fondo oscuro */
+  color: #e2e8f0;      /* Texto claro */
 }
 
 /* =========================
    HEADER / ENCABEZADO
    ========================= */
-
 .header {
   padding: 28px 16px;
   text-align: center;
@@ -27,11 +25,12 @@ body {
 
 .header p { 
   margin: 0; 
-  opacity: .9; 
+  opacity: .9; /* Texto un poco más tenue */
 }
 
-/* BOTONES DEL HEADER */
-
+/* =========================
+   BOTONES DEL HEADER
+   ========================= */
 .nav-header{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -40,33 +39,29 @@ body {
   margin: 20px auto 0;
 }
 
-/* Inicio ocupa toda la fila */
+/* Primer botón ocupa toda la fila */
 .nav-header .btn:first-child{
   grid-column: 1 / 3;
 }
 
-/* Botones más grandes */
+/* Botones grandes */
 .nav-header .btn{
   padding: 28px;
   font-size: 22px;
 }
 
-
 /* =========================
    CONTENEDOR PRINCIPAL
    ========================= */
-
 .contenedor {
   max-width: 980px;
   margin: 0 auto;
   padding: 24px 16px;
 }
 
-
 /* =========================
    BOTONES
    ========================= */
-
 .btn {
   padding: 26px;
   border: 1px solid rgba(226,232,240,.16);
@@ -87,11 +82,9 @@ body {
   background: rgba(34,197,94,.10);
 }
 
-
 /* =========================
    SISTEMA DE VISTAS
    ========================= */
-
 .vista { 
   display: none; 
 }
@@ -100,11 +93,9 @@ body {
   display: block; 
 }
 
-
 /* =========================
    BOTÓN VOLVER
    ========================= */
-
 .btn-volver {
   margin-top: 16px;
   padding: 12px 14px;
@@ -115,11 +106,9 @@ body {
   cursor: pointer;
 }
 
-
 /* =========================
    TARJETAS
    ========================= */
-
 .tarjeta {
   margin-top: 14px;
   padding: 16px;
@@ -128,11 +117,9 @@ body {
   background: rgba(255,255,255,.05);
 }
 
-
 /* =========================
    GALERÍA
    ========================= */
-
 .galeria{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -153,20 +140,16 @@ body {
   transform: scale(1.05);
 }
 
-
 /* =========================
    OCULTAR DETALLES
    ========================= */
-
 .oculto{
   display:none;
 }
 
-
 /* =========================
    FORMULARIO
    ========================= */
-
 form{
   display: flex;
   flex-direction: column;
@@ -186,14 +169,14 @@ form textarea{
 
 form textarea{
   min-height: 90px;
-  resize: vertical;
+  resize: vertical; /* Permite cambiar tamaño vertical */
 }
 
 form button{
   padding: 12px;
   border-radius: 10px;
   border: none;
-  background: rgba(34,197,94,.8);
+  background: rgba(34,197,94,.8); /* Verde principal */
   color: white;
   font-size: 15px;
   cursor: pointer;
@@ -209,14 +192,44 @@ form button:hover{
   font-size: 14px;
 }
 
-
 /* =========================
    FOOTER
    ========================= */
-
 .footer {
   text-align: center;
   padding: 18px 16px;
   opacity: .8;
   border-top: 1px solid rgba(226,232,240,.12);
+}
+/* =========================
+   BOTONES SUPERIORES
+   ========================= */
+
+.btn-sesion{
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+/* cerrar sesión */
+#cerrarSesion{
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: white;
+}
+
+/* asistente IA */
+#asistenteIA{
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  color: white;
+}
+
+/* efectos hover */
+.btn-sesion:hover{
+  transform: scale(1.05);
+  opacity: 0.9;
 }

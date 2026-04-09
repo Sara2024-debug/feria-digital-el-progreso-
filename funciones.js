@@ -1,166 +1,85 @@
-/* =====================================
-   SISTEMA DE CAMBIO DE VISTAS
-===================================== */
+/*
+Archivo encargado de manejar la interacción
+de la interfaz del usuario.
+*/
 
-// Cambia entre vistas sin recargar la página
-function mostrarVista(nombre, guardarHistorial = true) {
+document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("Cambiando a la vista:", nombre);
+  /* ============================= */
+  /* BOTONES VER MÁS / VER MENOS */
+  /* ============================= */
 
-  const vistas = document.querySelectorAll(".vista");
-  vistas.forEach(v => v.classList.remove("activa"));
+  const botones = document.querySelectorAll(".ver-mas");
 
-  const objetivo = document.getElementById(`vista-${nombre}`);
-
-  if (objetivo) {
-
-    objetivo.classList.add("activa");
-    console.log("Vista mostrada correctamente:", nombre);
-
-    // Guardar en historial del navegador
-    if (guardarHistorial) {
-      history.pushState({ vista: nombre }, "", "#vista-" + nombre);
-    }
-
-  } else {
-    console.log("Error: la vista no existe ->", nombre);
-  }
-
-}
-
-
-/* =====================================
-   BOTONES DEL MENÚ PRINCIPAL
-===================================== */
-
-document.querySelectorAll("button[data-vista]").forEach(btn => {
-
-  btn.addEventListener("click", () => {
-
-    const vista = btn.getAttribute("data-vista");
-
-    console.log("Botón presionado:", vista);
-
-    mostrarVista(vista);
-
-  });
-
-});
-
-
-/* =====================================
-   BOTONES VOLVER
-===================================== */
-
-const botonesVolver = [
-  "volver-cultivo",
-  "volver-galeria",
-  "volver-historias",
-  "volver-contacto"
-];
-
-botonesVolver.forEach(id => {
-
-  const boton = document.getElementById(id);
-
-  if (boton) {
+  botones.forEach(boton => {
 
     boton.addEventListener("click", () => {
 
-      console.log("Volviendo al inicio desde", id);
+      const detalle = boton.nextElementSibling;
 
-      mostrarVista("inicio");
+      // Alterna la clase oculto para mostrar/ocultar el detalle
+      detalle.classList.toggle("oculto");
+
+      // Cambia el texto del botón según el estado
+      if (detalle.classList.contains("oculto")) {
+        boton.textContent = "Ver más";
+      } else {
+        boton.textContent = "Ver menos";
+      }
 
     });
 
-  }
-
-});
-
-
-/* =====================================
-   BOTÓN VER MÁS / VER MENOS
-===================================== */
-
-document.querySelectorAll(".ver-mas").forEach(boton => {
-
-  boton.addEventListener("click", () => {
-
-    const detalle = boton.nextElementSibling;
-
-    detalle.classList.toggle("oculto");
-
-    if (detalle.classList.contains("oculto")) {
-
-      boton.textContent = "Ver más";
-      console.log("Se ocultó la información");
-
-    } else {
-
-      boton.textContent = "Ver menos";
-      console.log("Se mostró más información");
-
-    }
-
   });
 
-});
 
+  /* ============================= */
+  /* VALIDACIÓN DEL FORMULARIO */
+  /* ============================= */
 
-/* =====================================
-   VALIDACIÓN DEL FORMULARIO
-===================================== */
+  const formulario = document.getElementById("formulario");
 
-const formulario = document.getElementById("formulario");
+  if (formulario) {
 
-if (formulario) {
+    formulario.addEventListener("submit", (e) => {
 
-  formulario.addEventListener("submit", function (e) {
+      // Evitamos que la página se recargue al enviar
+      e.preventDefault();
 
-    e.preventDefault();
+      // Obtenemos los valores de los campos y eliminamos espacios al inicio y al final
+      const nombre = document.getElementById("nombre").value.trim();
+      const celular = document.getElementById("celular").value.trim();
+      const mensaje = document.getElementById("mensaje").value.trim();
 
-    let nombre = document.getElementById("nombre").value;
-    let celular = document.getElementById("celular").value;
-    let mensaje = document.getElementById("mensaje").value;
+      const respuesta = document.getElementById("respuesta");
 
-    const respuesta = document.getElementById("respuesta");
+      // Validación del nombre
+      if (nombre === "") {
+        respuesta.textContent = "El nombre es obligatorio";
+        return;
+      }
 
-    if (nombre === "") {
-      respuesta.textContent = "Error: el nombre es obligatorio";
-      console.log("Error: nombre vacío");
-      return;
-    }
+      // =========================================
+      // VALIDACIÓN DEL CELULAR (Mejora 5)
+      // Acepta solo 10 dígitos numéricos
+      // =========================================
+      if (!/^[0-9]{10}$/.test(celular)) {
+        respuesta.textContent = "El celular debe tener 10 números";
+        return;
+      }
 
-    if (celular.length !== 10) {
-      respuesta.textContent = "Error: el celular debe tener 10 dígitos";
-      console.log("Error: celular incorrecto");
-      return;
-    }
+      // Validación del mensaje
+      if (mensaje.length < 10) {
+        respuesta.textContent = "El mensaje debe tener mínimo 10 caracteres";
+        return;
+      }
 
-    if (mensaje.length < 10) {
-      respuesta.textContent = "Error: el mensaje debe tener mínimo 10 caracteres";
-      console.log("Error: mensaje muy corto");
-      return;
-    }
+      // Mensaje de éxito
+      respuesta.textContent = "Formulario enviado correctamente";
 
-    respuesta.textContent = "Formulario enviado correctamente";
-    console.log("Formulario válido");
+      // Limpiamos el formulario
+      formulario.reset();
 
-  });
-
-}
-
-
-/* =====================================
-   HISTORIAL DEL NAVEGADOR
-===================================== */
-
-// Detecta uso de flechas del navegador (atrás / adelante)
-window.addEventListener("popstate", function (e) {
-
-  if (e.state && e.state.vista) {
-
-    mostrarVista(e.state.vista, false);
+    });
 
   }
 

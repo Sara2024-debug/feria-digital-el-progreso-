@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Login Feria Digital</title>
-  <link rel="stylesheet" href="estilos.css">
+<meta charset="UTF-8">
+<title>Login Feria Digital</title>
+<link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
 
 <section class="contenedor">
-  <h2>Inicio de sesión</h2>
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="Correo" required>
-    <input type="password" id="password" placeholder="Contraseña" required>
-    <button type="submit">Ingresar</button>
-    <button type="button" id="registrar">Registrarse</button>
-    <p id="loginMensaje"></p>
-  </form>
+
+<h2>Inicio de sesión</h2>
+
+<!-- 
+Formulario de login.
+Los campos tienen required para evitar enviar vacío.
+Se usará Firebase para autenticar al usuario.
+-->
+<form id="loginForm">
+
+  <!-- Campo correo -->
+  <input type="email" id="email" placeholder="Correo" required>
+
+  <!-- Campo contraseña -->
+  <input type="password" id="password" placeholder="Contraseña" required>
+
+  <!-- Botón para iniciar sesión -->
+  <button type="submit">Ingresar</button>
+
+  <!-- Botón para ir a registro -->
+  <button type="button" id="registrar">Registrarse</button>
+
+  <!-- Aquí se mostrarán mensajes de error o confirmación -->
+  <p id="loginMensaje"></p>
+
+</form>
+
 </section>
 
+<!-- Script de Firebase -->
 <script type="module" src="firebase.js"></script>
+<!--
+Mejora aplicada en firebase.js:
+- Validación de contraseña mínima 6 caracteres antes de registrar.
+- Manejo de login y registro con Firebase Auth.
+-->
 
 </body>
 </html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asistente IA</title>
+    <link rel="stylesheet" href="estilos.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .chat-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      h2 {
+        margin-top: 0;
+        text-align: center;
+      }
+
+      #mensajes {
+        min-height: 320px;
+        max-height: 420px;
+        overflow-y: auto;
+        border: 1px solid rgba(226, 232, 240, 0.16);
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      .mensaje {
+        margin: 8px 0;
+        padding: 10px 12px;
+        border-radius: 10px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+      }
+
+      .usuario {
+        background: rgba(34, 197, 94, 0.2);
+        border: 1px solid rgba(34, 197, 94, 0.4);
+      }
+
+      .bot {
+        background: rgba(59, 130, 246, 0.18);
+        border: 1px solid rgba(59, 130, 246, 0.35);
+      }
+
+      .error {
+        background: rgba(239, 68, 68, 0.15);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        color: #fecaca;
+      }
+
+      #mensajeInput {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(226, 232, 240, 0.16);
+        margin-bottom: 10px;
+        box-sizing: border-box;
+      }
+
+      .acciones {
+        display: flex;
+        gap: 10px;
+      }
+
+      #enviarBtn {
+        padding: 10px 16px;
+        border: none;
+        background: rgba(34, 197, 94, 0.9);
+        color: #fff;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      #enviarBtn:hover {
+        background: rgba(34, 197, 94, 1);
+      }
+
+      #enviarBtn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      #estado {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #cbd5e1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <h2>Asistente IA</h2>
+
+      <div id="mensajes"></div>
+
+      <input
+        type="text"
+        id="mensajeInput"
+        placeholder="Escribe tu mensaje"
+        autocomplete="off"
+      />
+
+      <div class="acciones">
+        <button id="enviarBtn">Enviar</button>
+      </div>
+
+      <div id="estado">Conectando con Firebase AI Logic...</div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+      import {
+        getAI,
+        getGenerativeModel,
+        GoogleAIBackend,
+      } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-ai.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBhiAIqXDwaVORatVC_dZngvw6_1va8vHQ",
+        authDomain: "feria-digital-vereda-el-progre.firebaseapp.com",
+        projectId: "feria-digital-vereda-el-progre",
+        storageBucket: "feria-digital-vereda-el-progre.firebasestorage.app",
+        messagingSenderId: "916717659616",
+        appId: "1:916717659616:web:3a6e1e8dc1d520491e3785",
+        measurementId: "G-PF7R2P9R8G",
+      };
+
+      const mensajesDiv = document.getElementById("mensajes");
+      const input = document.getElementById("mensajeInput");
+      const enviarBtn = document.getElementById("enviarBtn");
+      const estado = document.getElementById("estado");
+
+      function agregarMensaje(texto, tipo = "bot") {
+        const div = document.createElement("div");
+        div.className = `mensaje ${tipo}`;
+        div.textContent = texto;
+        mensajesDiv.appendChild(div);
+        mensajesDiv.scrollTop = mensajesDiv.scrollHeight;
+      }
+
+      let model = null;
+
+      try {
+        const firebaseApp = initializeApp(firebaseConfig);
+
+        const ai = getAI(firebaseApp, {
+          backend: new GoogleAIBackend(),
+        });
+
+        model = getGenerativeModel(ai, {
+          model: "gemini-2.5-flash-lite",
+        });
+
+        estado.textContent = "Conexión lista. Ya puedes escribir.";
+        agregarMensaje(
+          "Hola, soy tu asistente IA. Escríbeme tu consulta.",
+          "bot",
+        );
+      } catch (error) {
+        console.error("Error inicializando Firebase AI Logic:", error);
+        estado.textContent = "Error al conectar con Firebase AI Logic.";
+        agregarMensaje(
+          "No se pudo inicializar la conexión con Firebase.",
+          "error",
+        );
+      }
+
+      async function enviarMensaje() {
+        const texto = input.value.trim();
+        if (!texto || !model) return;
+
+        agregarMensaje("Tú: " + texto, "usuario");
+        input.value = "";
+        enviarBtn.disabled = true;
+        estado.textContent = "La IA está escribiendo...";
+
+        try {
+
+const prompt = `
+Eres un asistente experto en cultivos de café.
+
+Solo debes responder preguntas relacionadas con:
+- cultivo del café
+- producción de café
+- cosecha del café
+- café orgánico
+- tipos de café
+- procesos del café
+
+Si el usuario hace una pregunta que no tenga relación con el café,
+responde amablemente que solo puedes ayudar con temas
+relacionados con el cultivo del café.
+
+Responde en español, de forma clara y breve.
+
+Pregunta del usuario: ${texto}
+`;
+
+
+          const result = await model.generateContent(prompt);
+
+          // Guardamos la respuesta
+          let respuesta = result.response.text();
+
+          // Quitamos todos los asteriscos (*)
+          respuesta = respuesta.replace(/\*/g, "");
+
+          agregarMensaje("IA: " + respuesta, "bot");
+          estado.textContent = "Respuesta generada correctamente.";
+        } catch (error) {
+          console.error("Error al generar respuesta:", error);
+          agregarMensaje("Ocurrió un error al generar la respuesta.", "error");
+          estado.textContent = "Hubo un error con la generación.";
+        } finally {
+          enviarBtn.disabled = false;
+          input.focus();
+        }
+      }
+
+      enviarBtn.addEventListener("click", enviarMensaje);
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          enviarMensaje();
+        }
+      });
+    </script>
+  </body>
+</html>
