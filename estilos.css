@@ -233,3 +233,56 @@ form button:hover{
   transform: scale(1.05);
   opacity: 0.9;
 }
+
+/* =========================
+   RESPONSIVE REAL (CELULAR)
+   ========================= */
+@media (max-width: 600px){
+
+  /* HEADER */
+  .header h1{
+    font-size: 40px;
+  }
+
+  .header p{
+    font-size: 24px;
+  }
+
+  /* BOTONES */
+  #cerrarSesion,
+  #asistenteIA{
+    width: 100%;
+    display: block;
+    margin: 8px 0;
+  }
+
+  /* MENÚ (LO MÁS IMPORTANTE) */
+  .nav-header{
+    grid-template-columns: 1fr;
+  }
+
+  .nav-header .btn{
+    font-size: 24px;
+    padding: 18px;
+  }
+
+  /* CONTENIDO */
+  .contenedor{
+    padding: 16px 10px;
+  }
+
+  /* TARJETAS */
+  .tarjeta{
+    padding: 12px;
+  }
+
+  /* GALERÍA */
+  .galeria{
+    grid-template-columns: 1fr;
+  }
+
+  .galeria img{
+    height: 150px;
+  }
+
+}
